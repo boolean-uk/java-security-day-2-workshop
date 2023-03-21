@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: Java API Exercise - Core Criteria
+  description: |-
+  version: 0.2.2
+
+servers:
+  - url: http://localhost:4000
+tags:
+  - name: examples
+paths:
+  /examples:
+    post:
+      tags:
+        - examples
+      summary: Example POST route
+      description: Description of an example POST route
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExample'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+    get:
+      tags:
+        - examples
+      summary: Example GET route
+      description: Description of an example GET route
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllExamples'
+  /examples/{id}:
+    put:
+      tags:
+        - examples
+      summary: Example PUT route
+      description: Description of an example PUT route
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the example to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExample'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+    delete:
+      tags:
+        - examples
+      summary: Example DELETE route
+      description: Description of an example DELETE route
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the example to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+
+components:
+  schemas:
+    CreateExample:
+      type: object
+      required: [propertyOne, propertyTwo]
+      properties:
+        propertyOne:
+          type: string
+          example: "Example Value"
+        propertyTwo:
+          type: email
+          format: email
+          example: "example@email.value"
+    Example:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        propertyOne:
+          type: string
+          example: "Example Value"
+        propertyTwo:
+          type: string
+          example: "example@email.value"
+        createdAt:
+          type: string
+          format: DateTime
+          pattern: YYYY-MM-DDTHH:MM:SS
+          example: 2023-03-14T11:01:56.633+00:00
+    AllExamples:
+      type: array
+      items:
+        $ref: '#/components/schemas/Example'
