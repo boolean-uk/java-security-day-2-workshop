@@ -956,4 +956,3 @@ public class ManualEncryption {
 * What do we mean by the term `Salt` in the context of passwords?
 * Why is it important? 
 * How could we add it to our code?
-* 
