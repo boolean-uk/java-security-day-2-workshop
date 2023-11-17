@@ -1,4 +1,4 @@
-# Java API Exercise
+# Java Security Day 2 Workshop
 
 ## Learning Objectives
 - Use a Bearer Token/JWT to secure an API
