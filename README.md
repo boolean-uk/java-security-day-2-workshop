@@ -337,7 +337,6 @@ package com.booleanuk.library.payload.response;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
@@ -350,28 +349,12 @@ public class JwtResponse {
     private String email;
     private List<String> roles;
 
-    public JwtResponse(String accessToken, int id, String username, String email, List<String> roles) {
-        this.token = accessToken;
+    public JwtResponse(String token, int id, String username, String email, List<String> roles) {
+        this.token = token;
         this.id = id;
         this.username = username;
         this.email = email;
         this.roles = roles;
-    }
-
-    public String getAccessToken() {
-        return this.getToken();
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.setToken(accessToken);
-    }
-
-    public String getTokenType() {
-        return this.getType();
-    }
-
-    public void setTokenType(String tokenType) {
-        this.setType(tokenType);
     }
 }
 ```
@@ -880,21 +863,19 @@ or whatever information you signed up using. You should get back something that 
 
 ```json
 {
-	"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZlIiwiaWF0IjoxNzAwMjIxMjA4LCJleHAiOjE3MDAzMDc2MDh9.Bc3RAZ8DbVIkRz-lC1NeHZxe2TGMIEa7eJFtq0aomag",
-	"type": "Bearer",
-	"id": 1,
-	"username": "dave",
-	"email": "dave@email.com",
-	"roles": [
-		"ROLE_USER",
-		"ROLE_MODERATOR"
-	],
-	"accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZlIiwiaWF0IjoxNzAwMjIxMjA4LCJleHAiOjE3MDAzMDc2MDh9.Bc3RAZ8DbVIkRz-lC1NeHZxe2TGMIEa7eJFtq0aomag",
-	"tokenType": "Bearer"
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZlIiwiaWF0IjoxNzAwNDc4NjY5LCJleHAiOjE3MDA1NjUwNjl9.U6r5CGK8rkg2NFMWZjBorDR_rTuUHWHEtDk4kHr-4tU",
+  "type": "Bearer",
+  "id": 1,
+  "username": "dave",
+  "email": "dave@email.com",
+  "roles": [
+    "ROLE_USER",
+    "ROLE_MODERATOR"
+  ]
 }
 ```
 
-Copy the text that is in the `token` or `accessToken` fields. In Insomnia open up a Get Request to the Get all Books endpoint: [http://localhost:4000/books](http://localhost:4000/books) , try and access it you should be denied. So go to the `Authentication` tab and choose Bearer. Paste the token string into the TOKEN part and add the word Bearer to the prefix part then try making the request again, this time you should succeed.
+Copy the text that is in the `token` field (in your response not this version). In Insomnia open up a Get Request to the Get all Books endpoint: [http://localhost:4000/books](http://localhost:4000/books) , try and access it you should be denied. So go to the `Authentication` tab and choose Bearer. Paste the token string into the TOKEN part and add the word Bearer to the prefix part then try making the request again, this time you should succeed.
 
 ## Encryption
 
